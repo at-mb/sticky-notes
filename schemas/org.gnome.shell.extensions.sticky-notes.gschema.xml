@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.sticky-notes"
+          path="/org/gnome/shell/extensions/sticky-notes/">
+    <key name="notes-visible" type="b">
+      <default>true</default>
+      <summary>Whether notes are shown</summary>
+    </key>
+    <key name="layer" type="s">
+      <choices>
+        <choice value="above"/>
+        <choice value="desktop"/>
+      </choices>
+      <default>'above'</default>
+      <summary>Where notes are placed</summary>
+      <description>“above”: above windows (below the top bar). “desktop”: on the desktop background, below windows.</description>
+    </key>
+    <key name="show-indicator" type="b">
+      <default>true</default>
+      <summary>Show the top bar icon</summary>
+    </key>
+    <key name="default-color" type="s">
+      <default>'yellow'</default>
+      <summary>Color of new notes</summary>
+    </key>
+    <key name="default-font-size" type="i">
+      <range min="6" max="48"/>
+      <default>12</default>
+      <summary>Font size (pt) of new notes</summary>
+    </key>
+    <key name="new-note-shortcut" type="as">
+      <default><![CDATA[['<Super><Alt>n']]]></default>
+      <summary>Keyboard shortcut that creates a new note</summary>
+    </key>
+    <key name="toggle-shortcut" type="as">
+      <default>[]</default>
+      <summary>Keyboard shortcut that shows or hides the notes</summary>
+    </key>
+  </schema>
+</schemalist>

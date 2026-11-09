@@ -1,0 +1,245 @@
+.sticky-note {
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.sticky-note.dark {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---- Header ---- */
+
+.sticky-note-header {
+    padding: 4px 4px 0 4px;
+    spacing: 2px;
+}
+
+.sticky-note-button {
+    padding: 5px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sticky-note-button:hover,
+.sticky-note-button:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.sticky-note-button:active {
+    background-color: rgba(0, 0, 0, 0.18);
+}
+
+.sticky-note.dark .sticky-note-button {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sticky-note.dark .sticky-note-button:hover,
+.sticky-note.dark .sticky-note-button:focus {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+/* ---- Color / confirm rows ---- */
+
+.sticky-note-row {
+    padding: 4px 8px;
+    spacing: 6px;
+}
+
+.sticky-note-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.sticky-note-swatch:hover,
+.sticky-note-swatch:focus {
+    border: 2px solid rgba(0, 0, 0, 0.6);
+}
+
+.sticky-note.dark .sticky-note-swatch {
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.sticky-note-confirm-row StLabel {
+    font-weight: bold;
+}
+
+.sticky-note-text-button {
+    padding: 3px 10px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sticky-note-text-button:hover,
+.sticky-note-text-button:focus {
+    background-color: rgba(0, 0, 0, 0.18);
+}
+
+.sticky-note.dark .sticky-note-text-button {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.sticky-note-text-button.destructive,
+.sticky-note.dark .sticky-note-text-button.destructive {
+    background-color: #c01c28;
+    color: #ffffff;
+}
+
+.sticky-note-text-button.destructive:hover,
+.sticky-note-text-button.destructive:focus {
+    background-color: #e01b24;
+}
+
+/* ---- Deadline ---- */
+
+.sticky-note-deadline-row {
+    spacing: 4px;
+}
+
+.sticky-note-deadline-buttons {
+    spacing: 6px;
+}
+
+.sticky-note-deadline-entry,
+.sticky-note-deadline-entry:hover,
+.sticky-note-deadline-entry:focus {
+    background-color: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: none;
+    padding: 3px 6px;
+    min-height: 0;
+    color: rgba(0, 0, 0, 0.87);
+    caret-color: rgba(0, 0, 0, 0.87);
+    selection-background-color: rgba(0, 0, 0, 0.22);
+    selected-color: #000000;
+    transition-duration: 0;
+}
+
+.sticky-note-deadline-entry:focus {
+    border-color: rgba(0, 0, 0, 0.45);
+}
+
+.sticky-note-deadline-entry .hint-text {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.sticky-note-deadline-entry.error,
+.sticky-note.dark .sticky-note-deadline-entry.error {
+    border-color: #c01c28;
+}
+
+.sticky-note.dark .sticky-note-deadline-entry {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.92);
+    caret-color: rgba(255, 255, 255, 0.92);
+    selection-background-color: rgba(255, 255, 255, 0.28);
+    selected-color: #ffffff;
+}
+
+.sticky-note.dark .sticky-note-deadline-entry .hint-text {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.sticky-note-deadline-badge {
+    padding: 2px 6px;
+    margin-left: 4px;
+    border-radius: 6px;
+    font-size: 9pt;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sticky-note-deadline-badge-box {
+    spacing: 4px;
+}
+
+.sticky-note-deadline-badge:hover,
+.sticky-note-deadline-badge:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sticky-note-deadline-badge.due-soon {
+    color: #9c4a00;
+    font-weight: bold;
+}
+
+.sticky-note-deadline-badge.overdue {
+    background-color: #c01c28;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.sticky-note-deadline-badge.overdue:hover,
+.sticky-note-deadline-badge.overdue:focus {
+    background-color: #e01b24;
+}
+
+.sticky-note.dark .sticky-note-deadline-badge {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sticky-note.dark .sticky-note-deadline-badge:hover,
+.sticky-note.dark .sticky-note-deadline-badge:focus {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.sticky-note.dark .sticky-note-deadline-badge.due-soon {
+    color: #ffa348;
+}
+
+.sticky-note.dark .sticky-note-deadline-badge.overdue {
+    color: #ffffff;
+}
+
+/* ---- Text area ---- */
+/* The shell theme styles every StEntry; neutralize all of it here. */
+
+.sticky-note-entry,
+.sticky-note-entry:hover,
+.sticky-note-entry:focus {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 4px 10px;
+    min-height: 0;
+    color: rgba(0, 0, 0, 0.87);
+    caret-color: rgba(0, 0, 0, 0.87);
+    selection-background-color: rgba(0, 0, 0, 0.22);
+    selected-color: #000000;
+    transition-duration: 0;
+}
+
+.sticky-note-entry .hint-text {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.sticky-note.dark .sticky-note-entry {
+    color: rgba(255, 255, 255, 0.92);
+    caret-color: rgba(255, 255, 255, 0.92);
+    selection-background-color: rgba(255, 255, 255, 0.28);
+    selected-color: #ffffff;
+}
+
+.sticky-note.dark .sticky-note-entry .hint-text {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.sticky-note-scroll {
+    padding: 0;
+}
+
+/* ---- Footer / resize grip ---- */
+
+.sticky-note-footer {
+    padding: 0 3px 3px 3px;
+}
+
+.sticky-note-grip {
+    color: rgba(0, 0, 0, 0.45);
+}

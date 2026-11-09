@@ -1,0 +1,9 @@
+{
+  "uuid": "sticky-notes@osmanmb",
+  "name": "Sticky Notes",
+  "description": "Sticky notes on your desktop or above your windows. Drag, resize, recolor, add deadlines, and create new ones with a keyboard shortcut. Notes are saved automatically.",
+  "shell-version": ["46"],
+  "settings-schema": "org.gnome.shell.extensions.sticky-notes",
+  "url": "https://github.com/at-mb/sticky-notes",
+  "version": 2
+}

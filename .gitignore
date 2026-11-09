@@ -1,0 +1,5 @@
+# Built package (attach to GitHub Releases instead)
+*.shell-extension.zip
+
+# Compiled schemas
+schemas/gschemas.compiled
