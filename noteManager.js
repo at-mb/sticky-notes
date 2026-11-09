@@ -276,6 +276,11 @@ export class NoteManager {
         const parent = note.actor.get_parent();
         if (!parent)
             return;
+        // Clutter only drops key focus when a *mapped* actor goes away, so a
+        // hidden note (e.g. one created from the Overview) would leave the
+        // stage pointing at its destroyed text.
+        if (note.hasKeyFocus())
+            global.stage.set_key_focus(null);
         if (note._layer === 'above')
             Main.layoutManager.untrackChrome(note.actor);
         parent.remove_child(note.actor);

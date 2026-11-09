@@ -1,6 +1,7 @@
 import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
@@ -16,6 +17,32 @@ import {
 export const MIN_WIDTH = 190;
 export const MIN_HEIGHT = 110;
 
+// ---- Compatibility across GNOME versions ------------------------------
+
+// St.BoxLayout:vertical was replaced by :orientation in GNOME 48 and removed in 51.
+const VERTICAL = GObject.Object.find_property.call(St.BoxLayout, 'orientation')
+    ? {orientation: Clutter.Orientation.VERTICAL}
+    : {vertical: true};
+
+/**
+ * Shows the move/resize cursor while dragging `actor` (`mode` is 'move' or
+ * 'resize'), or restores the normal cursor when `mode` is null.
+ * GNOME 50 replaced global.display.set_cursor() with per-actor cursors, and
+ * GNOME 48 renamed Meta.Cursor.MOVE_OR_RESIZE_WINDOW to Meta.Cursor.MOVE.
+ */
+function setDragCursor(actor, mode) {
+    if (actor.set_cursor_type) {
+        actor.set_cursor_type(mode === 'move' ? Clutter.CursorType.MOVE
+            : mode === 'resize' ? Clutter.CursorType.SE_RESIZE
+                : Clutter.CursorType.INHERIT);
+    } else {
+        global.display.set_cursor(mode === 'move'
+            ? Meta.Cursor.MOVE ?? Meta.Cursor.MOVE_OR_RESIZE_WINDOW
+            : mode === 'resize' ? Meta.Cursor.SE_RESIZE
+                : Meta.Cursor.DEFAULT);
+    }
+}
+
 /**
  * One sticky note: a header (buttons + drag area), optional color, deadline
  * and delete-confirmation rows, a scrollable multi-line text entry and a
@@ -30,11 +57,12 @@ export class Note {
         this._deadline = data.deadline ?? null; // Unix timestamp (seconds) or null
         this.deadlineNotified = data.deadlineNotified ?? false;
         this._grab = null;
+        this._grabHandle = null;
         this._op = null;
 
         this.actor = new St.BoxLayout({
             style_class: 'sticky-note',
-            vertical: true,
+            ...VERTICAL,
             reactive: true,
             x: data.x,
             y: data.y,
@@ -128,7 +156,7 @@ export class Note {
     _buildDeadlineRow() {
         this._deadlineRow = new St.BoxLayout({
             style_class: 'sticky-note-row sticky-note-deadline-row',
-            vertical: true,
+            ...VERTICAL,
             visible: false,
         });
 
@@ -235,7 +263,7 @@ export class Note {
         // St.Entry centers its text vertically, so it isn't expanded; instead
         // clicks on the empty area below the text focus it (cursor at the end).
         const box = new St.BoxLayout({
-            vertical: true,
+            ...VERTICAL,
             x_expand: true,
             y_expand: true,
             reactive: true,
@@ -454,9 +482,8 @@ export class Note {
                 startH: this.actor.height,
             };
             this._grab = global.stage.grab(handle);
-            global.display.set_cursor(mode === 'move'
-                ? Meta.Cursor.MOVE_OR_RESIZE_WINDOW
-                : Meta.Cursor.SE_RESIZE);
+            this._grabHandle = handle;
+            setDragCursor(handle, mode);
             return Clutter.EVENT_STOP;
         });
 
@@ -494,7 +521,8 @@ export class Note {
         if (this._grab) {
             this._grab.dismiss();
             this._grab = null;
-            global.display.set_cursor(Meta.Cursor.DEFAULT);
+            setDragCursor(this._grabHandle, null);
+            this._grabHandle = null;
         }
         this._op = null;
     }

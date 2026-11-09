@@ -1,10 +1,9 @@
-# Sticky Notes — GNOME Shell 46 extension
+# Sticky Notes — GNOME Shell extension
 
 Sticky notes that live above your windows or on the desktop.
 
-> **Compatibility:** only **GNOME 46** is supported for now. Versions for
-> newer GNOME releases are coming soon. Check your version with
-> `gnome-shell --version`.
+> **Compatibility:** GNOME **46, 47, 48, 49, 50 and 51**. Check your version
+> with `gnome-shell --version`.
 
 - **Create** notes with <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> (configurable),
   from the top-bar icon, the `+` button on any note, or by showing notes when
