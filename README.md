@@ -30,15 +30,12 @@ Back that file up to back up your notes.
 ## Install
 
 ```sh
-make install          # packs and installs for the current user
+make install          # packs, installs and enables it for the current user
 ```
 
-On **Wayland**, GNOME only picks up newly installed extensions after you
-**log out and back in**. Then:
-
-```sh
-make enable           # or use the Extensions app
-```
+Then **log out and back in** once. On Wayland, GNOME only loads newly installed
+extensions at login. On X11 you can press <kbd>Alt</kbd>+<kbd>F2</kbd>, type
+`r` and press Enter instead.
 
 After editing the code, run `make install` again and log out/in to reload it.
 

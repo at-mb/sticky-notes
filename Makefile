@@ -17,9 +17,22 @@ $(ZIP): $(SOURCES) schemas/*.xml icons/*
 		--schema=schemas/org.gnome.shell.extensions.sticky-notes.gschema.xml \
 		.
 
+# Installs and marks the extension enabled. The shell only discovers new
+# extensions at login, so `gnome-extensions enable` fails for a fresh install;
+# writing the setting directly makes it load already enabled at next login.
 install: $(ZIP)
 	gnome-extensions install --force $(ZIP)
-	@echo "Installed. On Wayland, log out and back in, then run: make enable"
+	@en=$$(gsettings get org.gnome.shell enabled-extensions); \
+	case "$$en" in *"'$(UUID)'"*) ;; \
+	  "@as []"|"[]") gsettings set org.gnome.shell enabled-extensions "['$(UUID)']" ;; \
+	  *) gsettings set org.gnome.shell enabled-extensions "$${en%]}, '$(UUID)']" ;; \
+	esac; \
+	dis=$$(gsettings get org.gnome.shell disabled-extensions); \
+	case "$$dis" in *"'$(UUID)'"*) \
+	  dis=$$(echo "$$dis" | sed -e "s/'$(UUID)', //" -e "s/, '$(UUID)'//" -e "s/'$(UUID)'//"); \
+	  gsettings set org.gnome.shell disabled-extensions "$$dis" ;; \
+	esac
+	@echo "Installed and enabled. Log out and back in to load it."
 
 uninstall:
 	gnome-extensions uninstall $(UUID)
